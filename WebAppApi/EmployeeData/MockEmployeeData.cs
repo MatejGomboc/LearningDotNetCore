@@ -57,7 +57,7 @@ namespace WebAppApi.EmployeeData
 
         public Employee? GetEmployee(Guid id)
         {
-            return _employees.SingleOrDefault(item => item.Id == id);
+            return _employees.Find(item => item.Id == id);
         }
 
         public List<Employee> GetEmployees()
