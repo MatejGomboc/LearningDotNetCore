@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebAppApi.Services.Employees;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebAppApi.Models;
+using WebAppApi.Services.Employees;
 
 namespace WebAppApi.Controllers
 {
@@ -8,7 +9,7 @@ namespace WebAppApi.Controllers
     [Route("api/employees")]
     public class EmployeesController : ControllerBase
     {
-        private IEmployeesService _employeesService;
+        private readonly IEmployeesService _employeesService;
 
         public EmployeesController(IEmployeesService employeesService)
         {
@@ -16,6 +17,7 @@ namespace WebAppApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetEmployees()
         {
             return Ok(_employeesService.GetEmployees());
@@ -23,6 +25,7 @@ namespace WebAppApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
         public IActionResult GetEmployee(Guid id)
         {
             Employee? employee = _employeesService.GetEmployee(id);
@@ -36,18 +39,20 @@ namespace WebAppApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddEmployee(Employee employee)
         {
             _employeesService.AddEmployee(employee);
 
             return Created(
-                HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + HttpContext.Request.Path + "/" + employee.Id,
+                HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + HttpContext.Request.Path,
                 employee
             );
         }
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteEmployee(Guid id)
         {
             if (!_employeesService.DeleteEmployee(id))
@@ -59,6 +64,7 @@ namespace WebAppApi.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = "admin")]
         public IActionResult EditEmployee(Employee employee)
         {
             Employee? newEmployee = _employeesService.EditEmployee(employee);

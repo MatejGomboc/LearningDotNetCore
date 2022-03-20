@@ -10,6 +10,8 @@ namespace WebAppApi.DbContexts
         {
         }
 
+        public DbSet<UserRegister>? Users { get; set; }
+
         public DbSet<Employee>? Employees { get; set; }
     }
 }
