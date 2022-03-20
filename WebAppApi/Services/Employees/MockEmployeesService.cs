@@ -1,8 +1,8 @@
 ﻿using WebAppApi.Models;
 
-namespace WebAppApi.EmployeeData
+namespace WebAppApi.Services.Employees
 {
-    public class MockEmployeeData : IEmployeeData
+    public class MockEmployeesService : IEmployeesService
     {
         private List<Employee> _employees = new List<Employee>()
         {
@@ -23,35 +23,35 @@ namespace WebAppApi.EmployeeData
             }
         };
 
-        public void AddEmployee(Employee employee)
+        public void AddEmployee(Employee newEmployee)
         {
-            employee.Id = Guid.NewGuid();
-            _employees.Add(employee);
+            newEmployee.Id = Guid.NewGuid();
+            _employees.Add(newEmployee);
         }
 
         public bool DeleteEmployee(Guid id)
         {
-            Employee? employee = GetEmployee(id);
+            Employee? existingEmployee = GetEmployee(id);
 
-            if (employee == null)
+            if (existingEmployee == null)
             {
                 return false;
             }
 
-            _employees.Remove(employee);
+            _employees.Remove(existingEmployee);
             return true;
         }
 
-        public Employee? EditEmployee(Employee employee)
+        public Employee? EditEmployee(Employee newEmployee)
         {
-            int idx = _employees.FindIndex(item => item.Id == employee.Id);
+            int idx = _employees.FindIndex(item => item.Id == newEmployee.Id);
 
             if (idx == -1)
             {
                 return null;
             }
 
-            _employees[idx] = employee;
+            _employees[idx] = newEmployee;
             return _employees[idx];
         }
 

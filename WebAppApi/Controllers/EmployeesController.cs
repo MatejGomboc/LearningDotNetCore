@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebAppApi.EmployeeData;
+using WebAppApi.Services.Employees;
 using WebAppApi.Models;
 
 namespace WebAppApi.Controllers
@@ -7,25 +7,25 @@ namespace WebAppApi.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private IEmployeeData _employeeData;
+        private IEmployeesService _employeesService;
 
-        public EmployeesController(IEmployeeData employeeData)
+        public EmployeesController(IEmployeesService employeesService)
         {
-            _employeeData = employeeData;
+            _employeesService = employeesService;
         }
 
         [HttpGet]
         [Route("api/[controller]")]
         public IActionResult GetEmployees()
         {
-            return Ok(_employeeData.GetEmployees());
+            return Ok(_employeesService.GetEmployees());
         }
 
         [HttpGet]
         [Route("api/[controller]/{id}")]
         public IActionResult GetEmployee(Guid id)
         {
-            Employee? employee = _employeeData.GetEmployee(id);
+            Employee? employee = _employeesService.GetEmployee(id);
 
             if (employee == null)
             {
@@ -39,7 +39,7 @@ namespace WebAppApi.Controllers
         [Route("api/[controller]")]
         public IActionResult AddEmployee(Employee employee)
         {
-            _employeeData.AddEmployee(employee);
+            _employeesService.AddEmployee(employee);
 
             return Created(
                 HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + HttpContext.Request.Path + "/" + employee.Id,
@@ -51,7 +51,7 @@ namespace WebAppApi.Controllers
         [Route("api/[controller]/{id}")]
         public IActionResult DeleteEmployee(Guid id)
         {
-            if (!_employeeData.DeleteEmployee(id))
+            if (!_employeesService.DeleteEmployee(id))
             {
                 return NotFound($"Employee with id {id} was not found.");
             }
@@ -63,7 +63,7 @@ namespace WebAppApi.Controllers
         [Route("api/[controller]")]
         public IActionResult EditEmployee(Employee employee)
         {
-            Employee? newEmployee = _employeeData.EditEmployee(employee);
+            Employee? newEmployee = _employeesService.EditEmployee(employee);
 
             if (newEmployee == null)
             {

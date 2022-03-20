@@ -1,34 +1,35 @@
 ﻿using WebAppApi.Models;
+using WebAppApi.DbContexts;
 
-namespace WebAppApi.EmployeeData
+namespace WebAppApi.Services.Employees
 {
-    public class SqlEmployeeData : IEmployeeData
+    public class SqlEmployeesService : IEmployeesService
     {
-        private EmployeeContext _employeeContext;
+        private EmployeesDbContext _employeesDbContext;
 
-        public SqlEmployeeData(EmployeeContext employeeContext)
+        public SqlEmployeesService(EmployeesDbContext employeesDbContext)
         {
-            if (employeeContext.Employees == null)
+            if (employeesDbContext.Employees == null)
             {
-                throw new ArgumentNullException(nameof(employeeContext.Employees));
+                throw new ArgumentNullException(nameof(EmployeesDbContext.Employees));
             }
 
-            _employeeContext = employeeContext;
+            _employeesDbContext = employeesDbContext;
         }
 
-        public void AddEmployee(Employee employee)
+        public void AddEmployee(Employee newEmployee)
         {
-            employee.Id = Guid.NewGuid();
+            newEmployee.Id = Guid.NewGuid();
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            _employeeContext.Employees.Add(employee);
+            _employeesDbContext.Employees.Add(newEmployee);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-            _employeeContext.SaveChanges();
+            _employeesDbContext.SaveChanges();
         }
 
         public bool DeleteEmployee(Guid id)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            Employee? existingEmployee = _employeeContext.Employees.Find(id);
+            Employee? existingEmployee = _employeesDbContext.Employees.Find(id);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             if (existingEmployee == null)
@@ -36,38 +37,38 @@ namespace WebAppApi.EmployeeData
                 return false;
             }
 
-            _employeeContext.Employees.Remove(existingEmployee);
-            _employeeContext.SaveChanges();
+            _employeesDbContext.Employees.Remove(existingEmployee);
+            _employeesDbContext.SaveChanges();
             return true;
         }
 
-        public Employee? EditEmployee(Employee employee)
+        public Employee? EditEmployee(Employee newEmployee)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            Employee? existingEmployee = _employeeContext.Employees.Find(employee.Id);
+            Employee? existingEmployee = _employeesDbContext.Employees.Find(newEmployee.Id);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             if (existingEmployee == null)
             {
                 return null;
             }
 
-            existingEmployee.Name = employee.Name;
-            _employeeContext.Employees.Update(existingEmployee);
-            _employeeContext.SaveChanges();
+            existingEmployee.Name = newEmployee.Name;
+            _employeesDbContext.Employees.Update(existingEmployee);
+            _employeesDbContext.SaveChanges();
             return existingEmployee;
         }
 
         public Employee? GetEmployee(Guid id)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            return _employeeContext.Employees.Find(id);
+            return _employeesDbContext.Employees.Find(id);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
 
         public List<Employee> GetEmployees()
         {
 #pragma warning disable CS8604 // Possible null reference argument.
-            return _employeeContext.Employees.ToList();
+            return _employeesDbContext.Employees.ToList();
 #pragma warning restore CS8604 // Possible null reference argument.
         }
     }

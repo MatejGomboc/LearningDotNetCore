@@ -1,17 +1,17 @@
 using Microsoft.EntityFrameworkCore;
-using WebAppApi.EmployeeData;
-using WebAppApi.Models;
+using WebAppApi.Services.Employees;
+using WebAppApi.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<EmployeeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDb")));
+builder.Services.AddDbContext<EmployeesDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeesDb")));
 
-builder.Services.AddScoped<IEmployeeData, SqlEmployeeData>();
-//builder.Services.AddSingleton<IEmployeeData, MockEmployeeData>();
+builder.Services.AddScoped<IEmployeesService, SqlEmployeesService>();
+//builder.Services.AddSingleton<IEmployeesService, MockEmployeesService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
