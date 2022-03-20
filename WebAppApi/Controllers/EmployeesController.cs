@@ -5,6 +5,7 @@ using WebAppApi.Models;
 namespace WebAppApi.Controllers
 {
     [ApiController]
+    [Route("api/employees")]
     public class EmployeesController : ControllerBase
     {
         private IEmployeesService _employeesService;
@@ -15,14 +16,13 @@ namespace WebAppApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]")]
         public IActionResult GetEmployees()
         {
             return Ok(_employeesService.GetEmployees());
         }
 
         [HttpGet]
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public IActionResult GetEmployee(Guid id)
         {
             Employee? employee = _employeesService.GetEmployee(id);
@@ -36,7 +36,6 @@ namespace WebAppApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]")]
         public IActionResult AddEmployee(Employee employee)
         {
             _employeesService.AddEmployee(employee);
@@ -48,7 +47,7 @@ namespace WebAppApi.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public IActionResult DeleteEmployee(Guid id)
         {
             if (!_employeesService.DeleteEmployee(id))
@@ -60,7 +59,6 @@ namespace WebAppApi.Controllers
         }
 
         [HttpPatch]
-        [Route("api/[controller]")]
         public IActionResult EditEmployee(Employee employee)
         {
             Employee? newEmployee = _employeesService.EditEmployee(employee);

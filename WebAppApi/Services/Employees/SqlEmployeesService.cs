@@ -5,13 +5,13 @@ namespace WebAppApi.Services.Employees
 {
     public class SqlEmployeesService : IEmployeesService
     {
-        private EmployeesDbContext _employeesDbContext;
+        private WebAppDbContext _employeesDbContext;
 
-        public SqlEmployeesService(EmployeesDbContext employeesDbContext)
+        public SqlEmployeesService(WebAppDbContext employeesDbContext)
         {
             if (employeesDbContext.Employees == null)
             {
-                throw new ArgumentNullException(nameof(EmployeesDbContext.Employees));
+                throw new ArgumentNullException(nameof(WebAppDbContext.Employees));
             }
 
             _employeesDbContext = employeesDbContext;

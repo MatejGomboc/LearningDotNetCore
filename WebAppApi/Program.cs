@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<EmployeesDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeesDb")));
+builder.Services.AddDbContext<WebAppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebAppDb")));
 
 builder.Services.AddScoped<IEmployeesService, SqlEmployeesService>();
 //builder.Services.AddSingleton<IEmployeesService, MockEmployeesService>();

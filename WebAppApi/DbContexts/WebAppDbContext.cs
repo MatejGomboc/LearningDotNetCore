@@ -3,9 +3,9 @@ using WebAppApi.Models;
 
 namespace WebAppApi.DbContexts
 {
-    public class EmployeesDbContext : DbContext
+    public class WebAppDbContext : DbContext
     {
-        public EmployeesDbContext(DbContextOptions<EmployeesDbContext> options) :
+        public WebAppDbContext(DbContextOptions<WebAppDbContext> options) :
             base(options)
         {
         }
