@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoginForm.css";
+import "./LoginForm.scss";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -50,22 +50,24 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <form className="LoginForm" onSubmit={this.handleSubmit}>
-                <label className="LoginFormLabel LoginFormRow1">Username:</label>
+            <form onSubmit={this.handleSubmit}>
+                <label for="username" className="gridRow1">Username:</label>
                 <input
-                    className="LoginFormInput LoginFormRow1"
+                    id="username"
+                    className="gridRow1"
                     type="text"
                     value={this.state.username}
                     onChange={this.handleUsernameInputChange}
                 />
-                <label className="LoginFormLabel LoginFormRow2">Password:</label>
+                <label for="password" className="gridRow2">Password:</label>
                 <input
-                    className="LoginFormInput LoginFormRow2"
+                    id="password"
+                    className="gridRow2"
                     type="password"
                     value={this.state.password}
                     onChange={this.handlePasswordInputChange}
                 />
-                <input className="LoginFormButton" type="submit" value="Login" />
+                <input type="submit" className="gridRow3" value="Login" />
             </form>
         );
     }
