@@ -36,8 +36,6 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        alert(`username: ${this.state.username}; password: ${this.state.password};`);
-
         this.setState(
             {
                 username: "",
@@ -49,25 +47,25 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="username" className="GridRow1">Username:</label>
+        return(
+            <form className="LoginForm" onSubmit={this.handleSubmit}>
+                <label htmlFor="username" className="LoginForm GridRow1">Username:</label>
                 <input
                     id="username"
-                    className="GridRow1"
+                    className="LoginForm GridRow1"
                     type="text"
                     value={this.state.username}
                     onChange={this.handleUsernameInputChange}
                 />
-                <label htmlFor="password" className="GridRow2">Password:</label>
+                <label htmlFor="password" className="LoginForm GridRow2">Password:</label>
                 <input
                     id="password"
-                    className="GridRow2"
+                    className="LoginForm GridRow2"
                     type="password"
                     value={this.state.password}
                     onChange={this.handlePasswordInputChange}
                 />
-                <input type="submit" value="Login" />
+                <input type="submit" className="LoginForm" value="Login" />
             </form>
         );
     }
