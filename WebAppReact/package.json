@@ -5,6 +5,7 @@
   "main": "index.jsx",
   "dependencies": {
     "cra-template": "^1.2.0",
+    "eslint-plugin-react-hooks": "^4.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
@@ -21,7 +22,14 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
