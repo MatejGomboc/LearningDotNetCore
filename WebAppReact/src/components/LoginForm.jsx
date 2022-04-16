@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label for="username" className="gridRow1">Username:</label>
+                <label htmlFor="username" className="gridRow1">Username:</label>
                 <input
                     id="username"
                     className="gridRow1"
@@ -59,7 +59,7 @@ class LoginForm extends React.Component {
                     value={this.state.username}
                     onChange={this.handleUsernameInputChange}
                 />
-                <label for="password" className="gridRow2">Password:</label>
+                <label htmlFor="password" className="gridRow2">Password:</label>
                 <input
                     id="password"
                     className="gridRow2"
