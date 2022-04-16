@@ -16,32 +16,22 @@ class LoginForm extends React.Component {
     }
 
     handleUsernameInputChange(event) {
-        this.setState((prevState) => {
-                return {
-                    username: event.target.value,
-                    password: prevState.password
-                };
-            }
-        );
+        this.setState({
+            username: event.target.value,
+        });
     }
 
     handlePasswordInputChange(event) {
-        this.setState((prevState) => {
-                return {
-                    username: prevState.username,
-                    password: event.target.value
-                };
-            }
-        );
+        this.setState({
+            password: event.target.value
+        });
     }
 
     handleSubmit(event) {
-        this.setState(
-            {
-                username: "",
-                password: ""
-            }
-        );
+        this.setState({
+            username: "",
+            password: ""
+        });
 
         event.preventDefault();
     }
