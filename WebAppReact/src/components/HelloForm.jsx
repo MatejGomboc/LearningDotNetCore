@@ -1,11 +1,13 @@
 import React from "react";
 import "./HelloForm.scss";
 
-const HelloForm = () => {
+const HelloForm = (props) => {
     const handleClickRegister = () => {
+        props.onRegisterSelected();
     }
 
     const handleClickLogin = () => {
+        props.onLoginSelected();
     }
 
     return(
