@@ -2,17 +2,10 @@ import React from "react";
 import "./HelloForm.scss";
 
 class HelloForm extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClickRegister = this.handleClickRegister.bind(this);
-        this.handleClickLogin = this.handleClickLogin.bind(this);
+    handleClickRegister = (event) => {
     }
 
-    handleClickRegister(event) {
-    }
-
-    handleClickLogin(event) {
+    handleClickLogin = (event) => {
     }
 
     render() {
