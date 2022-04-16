@@ -4,10 +4,6 @@ import HelloForm from "../components/HelloForm";
 import LoginForm from "../components/LoginForm";
 
 const LandingPage = () => {
-    const handleHelloSelected = () => {
-        setForm("HelloForm");
-    }
-
     const handleRegisterSelected = () => {
     }
 
